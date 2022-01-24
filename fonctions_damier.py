@@ -12,16 +12,13 @@ numero_possible = [
     "21", "22", "23", "24", "25",
 ]
 
-
 # Fonction print - test
 
 def fonctions_damier(text):
-    if lettres_de_lalphabet[0] in text:
-        print("je clique sur un A")
+    if lettres_de_lalphabet[5] in text:
+        print('hi')
     if numero_possible[0] in text:
         print("je clique sur un 01")
-    if text == "A01":
-        print("Hello je suis le bouton  ", text)
     if text == "A02":
         print("Hello je suis le bouton  ", text)
 

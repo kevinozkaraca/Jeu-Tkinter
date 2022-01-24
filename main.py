@@ -1,15 +1,17 @@
+from faulthandler import disable
 from functools import partial
 from fonctions_damier import fonctions_damier
 from fonctions_menu import fonctions_menu
 from fonctions_demarrer import fonctions_demarrer
 import tkinter
-from tkinter import Menu
+from tkinter import DISABLED, Menu
 
 # Affichage et parametre de la fenetre
 fenetre = tkinter.Tk()
-fenetre.title("Jeu de la vie")
+fenetre.title("Jeu tkinter")
 fenetre.configure(background="#A5F2A5")
-fenetre.attributes('-fullscreen', True)
+#mettre en plein écran : (a décommenté)
+#fenetre.attributes('-fullscreen', True)
 fenetre.iconbitmap('images/icon.ico')
 
 
@@ -26,7 +28,6 @@ numero_possible = [
     "21", "22", "23", "24", "25",
 ]
 
-
 def damier_de_boutons():
     # Parametre des boutons et de la boucle d'affichage
     font_des_boutons = "Arial"
@@ -41,6 +42,8 @@ def damier_de_boutons():
     while compteur_de_lettre < 25:
         for i in range(26):
             text = f"{lettres_de_lalphabet[compteur_de_lettre]}{numero_possible[i]}"
+            bg="gray",
+            fg="black",
             btn = tkinter.Button(
                 fenetre,
                 text=text,
@@ -48,8 +51,20 @@ def damier_de_boutons():
                 font=(font_des_boutons, taille_de_font_boutons),
                 height=hauteur_des_boutons,
                 width=largeur_des_boutons,
+                bg=bg,
+                fg=fg,
                 command=partial(fonctions_damier, text),
-            )
+            )       
+            # Contour du jeu en noir
+            if 'A' in text or '25' in text or 'Y' in text or '01' in text :
+                btn = tkinter.Button(
+                            bg="black",
+                            fg="yellow",
+                            font=(font_des_boutons, taille_de_font_boutons),
+                            height=hauteur_des_boutons,
+                            width=largeur_des_boutons,
+                            state = DISABLED
+                            )
             btn.place(
                 x=10+i * espace_multiplie_entre_boutons,
                 y=10+ compteur_de_lignes * espace_multiplie_entre_boutons,
@@ -58,22 +73,26 @@ def damier_de_boutons():
         compteur_de_lignes = compteur_de_lignes + 1
         compteur_de_lettre = compteur_de_lettre + 1
 
- 
-    
+
 # Création du menu
 barre_de_menu = Menu(fenetre)
-# Création du menu
 filemenu = Menu(barre_de_menu, tearoff=0)
 filemenu.add_command(label="Recommencer", command=fonctions_menu)
 filemenu.add_command(label="Retour", command=fonctions_menu)
 barre_de_menu.add_cascade(label="Fichier", menu=filemenu)
 barre_de_menu.add_command(label="Quitter", command=fenetre.quit)
+
+
 # Affichage du menu
 fenetre.config(menu=barre_de_menu)
- 
-bouton_demarrer = tkinter.Button(fenetre, text ="Cliquez ici!",command=fonctions_demarrer)
-bouton_demarrer.place(x=800,y=10)
 
+
+# Bouton demarrer le jeu
+bouton_demarrer = tkinter.Button(fenetre, text ="Cliquez ici pour demarrer la partie",command=fonctions_demarrer)
+bouton_demarrer.place(x=850,y=10)
+
+
+# Affichage du damier
 damier_de_boutons()
 # Mainloop : A toujours mettre à la fin
 fenetre.mainloop()
