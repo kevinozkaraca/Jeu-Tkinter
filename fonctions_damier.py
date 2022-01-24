@@ -6,17 +6,16 @@ lettres_de_lalphabet = [
     "Q", "R", "S", "T", "U", "V", "W", "X", "Y",
 ]
 numero_possible = [
-    "01", "02", "03", "04", "05", "06", 
-    "05", "06", "07", "08", "09", "10",
-    "11", "12", "14", "15", "16", "17",
-    "18", "19", "20", "21", "22", "23",
-    "24", "25",
+    "01", "02", "03", "04", "05", "06", "05", 
+    "06", "07", "08", "09", "10", "11", "12",
+    "14", "15", "16", "17", "18", "19", "20", 
+    "21", "22", "23", "24", "25",
 ]
 
 
 # Fonction print - test
 
-def fonctions_boutons(text):
+def fonctions_damier(text):
     if lettres_de_lalphabet[0] in text:
         print("je clique sur un A")
     if numero_possible[0] in text:
